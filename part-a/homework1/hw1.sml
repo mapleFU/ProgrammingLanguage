@@ -52,7 +52,7 @@ fun number_in_months(day_list: (int*int*int) list, months: int list) =
     then 0
     else number_in_month(day_list, hd months) + number_in_months(day_list, tl months)
 
-val test3 = number_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = 3
+(* val test3 = number_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = 3 *)
 
 fun dates_in_month(day_list: (int*int*int) list, month: int) = 
     if null day_list
@@ -69,4 +69,51 @@ fun dates_in_month(day_list: (int*int*int) list, month: int) =
         end
 
 
-val test4 = dates_in_month ([(2012,2,28),(2013,12,1)],2) = [(2012,2,28)]
+(* val test4 = dates_in_month ([(2012,2,28),(2013,12,1)],2) = [(2012,2,28)] *)
+
+
+fun dates_in_months(day_list: (int*int*int) list, months: int list) = 
+    if null months
+    then []
+    (* TODO: change this. *)
+    else
+        let 
+            fun append_list(l1: (int*int*int) list, l2: (int*int*int) list) = 
+                if null l1
+                then l2
+                else (hd l1)::append_list(tl l1, l2)
+        in 
+            append_list(dates_in_month(day_list, hd months), dates_in_months(day_list, tl months))
+        end
+
+(* val test5 = dates_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = [(2012,2,28),(2011,3,31),(2011,4,28)] *)
+
+fun get_nth(str_list: string list, nth: int) = 
+    "nmsl"
+
+val test6 = get_nth (["hi", "there", "how", "are", "you"], 2) = "there"
+
+fun date_to_string (year: int, month: int, day: int) = 
+    "nmsl"
+
+val test7 = date_to_string (2013, 6, 1) = "June 1, 2013"
+
+fun number_before_reaching_sum(sum: int, ilist: int list) = 
+    ~1
+
+val test8 = number_before_reaching_sum (10, [1,2,3,4,5]) = 3
+
+fun what_month(day: int) =
+    ~1
+
+val test9 = what_month 70 = 3
+
+fun month_range (beg_day: int, end_day: int) = 
+    [0]
+
+val test10 = month_range (31, 34) = [1,2,2,2]
+
+fun oldest(age_list: (int*int*int) list) = 
+    NONE
+
+val test11 = oldest([(2012,2,28),(2011,3,31),(2011,4,28)]) = SOME (2011,3,31)
